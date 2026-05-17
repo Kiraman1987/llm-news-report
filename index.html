@@ -3,553 +3,556 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM News Dashboard</title>
+    <title>AI Daily — Intelligence Report</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+Pro:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --paper: #fafaf8;
+            --ink: #1a1a1a;
+            --ink-light: #5c5c5c;
+            --ink-muted: #8a8a8a;
+            --rule: #e0e0db;
+            --rule-light: #f0f0ee;
+            --accent: #c41e3a;
+            --accent-light: #fde8e8;
+            --teal: #0f766e;
+            --teal-bg: #e6f4f1;
+            --navy: #1e3a5f;
+            --violet: #5b21b6;
+            --olive: #4d7c0f;
+            --umber: #92400e;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { font-size: 15px; }
+
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: #f1f5f9;
-            color: #0f172a;
-            height: 100vh;
-            overflow: hidden;
-            padding: 12px;
+            font-family: 'Source Sans Pro', -apple-system, sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .dashboard {
-            max-width: 1600px;
+        .masthead {
+            max-width: 1200px;
             margin: 0 auto;
-            height: 100%;
-            display: grid;
-            grid-template-rows: auto auto 1fr;
-            gap: 10px;
+            padding: 2.5rem 3rem 1rem;
+            border-bottom: 2px solid var(--ink);
         }
 
-        /* HEADER */
-        .header {
+        .masthead-top {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            background: #fff;
-            padding: 8px 16px;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+            align-items: baseline;
+            margin-bottom: 0.5rem;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .header h1 {
-            font-size: 1.1rem;
+        .masthead-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3.2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header-sub {
-            font-size: 0.65rem;
-            color: #94a3b8;
-            margin-top: 1px;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .live-badge {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 3px 10px;
-            background: #dcfce7;
-            border: 1px solid #86efac;
-            border-radius: 100px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: #16a34a;
-        }
-
-        .live-dot {
-            width: 5px;
-            height: 5px;
-            background: #16a34a;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .time {
-            font-size: 0.65rem;
-            color: #94a3b8;
-        }
-
-        /* STATS */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-
-        .stat {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .stat-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .stat-icon.openai { background: #e0f2fe; }
-        .stat-icon.anthropic { background: #f3e8ff; }
-        .stat-icon.google { background: #dbeafe; }
-        .stat-icon.total { background: linear-gradient(135deg, #e0f2fe, #f3e8ff); }
-
-        .stat-num {
-            font-size: 1.1rem;
-            font-weight: 800;
+            letter-spacing: -0.02em;
             line-height: 1;
         }
 
-        .stat-num.openai { color: #0891b2; }
-        .stat-num.anthropic { color: #7c3aed; }
-        .stat-num.google { color: #2563eb; }
-        .stat-num.total {
-            background: linear-gradient(135deg, #0891b2, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            font-size: 0.6rem;
-            color: #94a3b8;
+        .masthead-sub {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--ink-muted);
+            margin-top: 0.5rem;
         }
 
-        /* MAIN GRID */
-        .main-grid {
+        .edition-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--rule);
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .edition-live {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .edition-live::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Newspaper layout */
+        .frontpage {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 3rem 3rem;
             display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 10px;
-            min-height: 0;
+            grid-template-columns: 1fr 280px;
+            gap: 2.5rem;
+            min-height: calc(100vh - 200px);
         }
 
-        /* LEFT: ARTICLES */
-        .articles-section {
+        /* Lead story - spans full width inside left column */
+        .main-column {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            min-height: 0;
-            overflow: hidden;
+            gap: 0;
         }
 
-        .section-label {
+        .lead-story {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--rule);
+            margin-bottom: 1.5rem;
+        }
+
+        .lead-kicker {
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
         }
 
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 8px;
-            flex: 1;
-            min-height: 0;
-        }
-
-        .article-card {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 10px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            transition: all 0.15s;
-            text-decoration: none;
-            color: inherit;
+        .lead-headline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
             cursor: pointer;
-            overflow: hidden;
+            transition: color 0.2s;
         }
 
-        .article-card:hover {
-            border-color: #0ea5e9;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
+        .lead-headline:hover {
+            color: var(--accent);
         }
 
-        .article-top {
+        .lead-headline a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .lead-dek {
+            font-size: 1rem;
+            color: var(--ink-light);
+            line-height: 1.55;
+            margin-bottom: 1rem;
+        }
+
+        .lead-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .lead-meta span {
             display: flex;
             align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 0.35rem;
         }
 
-        .tag {
-            font-size: 0.55rem;
+        /* Secondary stories grid */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem 2rem;
+        }
+
+        .story {
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .story-kicker {
+            font-size: 0.68rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
-            padding: 2px 8px;
-            border-radius: 4px;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
         }
 
-        .tag-product { background: #e0f2fe; color: #0e7490; }
-        .tag-safety { background: #d1fae5; color: #047857; }
-        .tag-engineering { background: #ffedd5; color: #b45309; }
-        .tag-company { background: #f3e8ff; color: #7c3aed; }
-        .tag-research { background: #dbeafe; color: #1d4ed8; }
-        .tag-security { background: #fee2e2; color: #b91c1c; }
-        .tag-event { background: #fce7f3; color: #be185d; }
+        .kicker-product { color: var(--teal); }
+        .kicker-safety { color: var(--olive); }
+        .kicker-engineering { color: var(--umber); }
+        .kicker-security { color: var(--accent); }
+        .kicker-research { color: var(--navy); }
+        .kicker-company { color: var(--violet); }
 
-        .article-date {
-            font-size: 0.6rem;
-            color: #94a3b8;
-            font-weight: 500;
-        }
-
-        .article-title {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: #0f172a;
+        .story-headline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 600;
             line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            flex: 1;
+            margin-bottom: 0.5rem;
         }
 
-        .article-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: auto;
-            padding-top: 5px;
-            border-top: 1px solid #f1f5f9;
-        }
-
-        .source-tag {
-            font-size: 0.55rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .source-openai { background: #e0f2fe; color: #0891b2; }
-        .source-anthropic { background: #f3e8ff; color: #7c3aed; }
-        .source-google { background: #dbeafe; color: #2563eb; }
-
-        .read-btn {
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: #fff;
-            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
-            padding: 4px 10px;
-            border-radius: 6px;
+        .story-headline a {
+            color: inherit;
             text-decoration: none;
-            transition: all 0.15s;
         }
 
-        .read-btn:hover {
-            box-shadow: 0 2px 8px rgba(14,165,233,0.3);
-            transform: translateY(-1px);
+        .story-headline a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
         }
 
-        /* RIGHT: HIGHLIGHTS */
-        .highlights-section {
+        .story-dek {
+            font-size: 0.9rem;
+            color: var(--ink-light);
+            line-height: 1.5;
+        }
+
+        .story-meta {
+            margin-top: 0.75rem;
+            font-size: 0.7rem;
+            color: var(--ink-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-            min-height: 0;
+            gap: 1rem;
         }
 
-        .highlights-card {
-            background: linear-gradient(135deg, rgba(14,165,233,0.04), rgba(139,92,246,0.04));
-            border: 1px solid rgba(14,165,233,0.12);
-            border-radius: 10px;
-            padding: 12px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            overflow: hidden;
+        .source-mark {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 500;
+            padding: 1px 6px;
+            border-radius: 2px;
+            background: var(--rule-light);
         }
 
-        .highlights-title {
-            font-size: 0.75rem;
+        /* Sidebar - In Brief */
+        .sidebar {
+            border-left: 1px solid var(--rule);
+            padding-left: 2rem;
+        }
+
+        .sidebar-header {
+            font-size: 0.7rem;
             font-weight: 700;
-            color: #0f172a;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--ink-muted);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--ink);
+            margin-bottom: 1rem;
         }
 
-        .highlight-item {
+        .brief-list {
+            list-style: none;
             display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            padding: 8px 10px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 6px;
-            font-size: 0.72rem;
-            color: #475569;
-            line-height: 1.4;
-            flex-shrink: 0;
+            flex-direction: column;
+            gap: 0;
         }
 
-        .highlight-item::before {
-            content: "⚡";
+        .brief-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--rule-light);
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: var(--ink-light);
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .brief-item::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
             font-size: 0.8rem;
-            flex-shrink: 0;
-            margin-top: 1px;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 1200px) {
-            .articles-grid { grid-template-columns: repeat(2, 1fr); }
+        .brief-item:last-child {
+            border-bottom: none;
         }
 
+        .brief-source {
+            display: block;
+            margin-top: 0.35rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--ink-muted);
+        }
+
+        /* Stats bar - subtle */
+        .stats-strip {
+            display: flex;
+            gap: 2rem;
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--rule);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ink-muted);
+        }
+
+        /* Footer */
+        .footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 3rem;
+            border-top: 1px solid var(--rule);
+            font-size: 0.7rem;
+            color: var(--ink-muted);
+            text-align: center;
+            letter-spacing: 0.04em;
+        }
+
+        /* Responsive */
         @media (max-width: 900px) {
-            body { overflow: auto; height: auto; }
-            .dashboard { height: auto; }
-            .main-grid { grid-template-columns: 1fr; }
-            .articles-grid { grid-template-columns: 1fr; }
-            .stats { grid-template-columns: repeat(2, 1fr); }
+            .frontpage { grid-template-columns: 1fr; }
+            .sidebar { border-left: none; border-top: 2px solid var(--ink); padding-left: 0; padding-top: 1.5rem; }
+            .stories-grid { grid-template-columns: 1fr; }
+            .masthead-title { font-size: 2.2rem; }
+            .masthead { padding: 1.5rem 1.5rem 0.75rem; }
+            .frontpage { padding: 1rem 1.5rem 2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard">
-        <!-- Header -->
-        <div class="header">
-            <div class="header-left">
-                <div class="logo">📊</div>
-                <div>
-                    <h1>LLM News Dashboard</h1>
-                    <div class="header-sub">OpenAI · Anthropic · Google AI</div>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="live-badge">
-                    <div class="live-dot"></div>
-                    LIVE
-                </div>
-                <div class="time">May 17, 22:20 UTC</div>
+    <header class="masthead">
+        <div class="masthead-top">
+            <div>
+                <div class="masthead-title">AI Daily</div>
+                <div class="masthead-sub">Intelligence Report — LLM &amp; Foundation Models</div>
             </div>
         </div>
+        <div class="edition-line">
+            <span class="edition-live">LIVE</span>
+            <span>Sunday, May 17, 2026</span>
+            <span>Updated 22:20 UTC</span>
+            <span>Vol. 1 — No. 1</span>
+        </div>
+    </header>
 
-        <!-- Stats -->
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-icon openai">🤖</div>
-                <div>
-                    <div class="stat-num openai">9</div>
+    <main class="frontpage">
+        <div class="main-column">
+            <!-- Lead Story -->
+            <article class="lead-story">
+                <div class="lead-kicker">OpenAI · Product</div>
+                <h2 class="lead-headline">
+                    <a href="https://openai.com/index/personal-finance-chatgpt/" target="_blank">
+                        OpenAI Launches Personal Finance Features Inside ChatGPT, Letting Users Link Bank Accounts
+                    </a>
+                </h2>
+                <p class="lead-dek">
+                    ChatGPT now helps users manage personal finances with AI-powered insights, spending analysis, and investment recommendations — a major expansion beyond conversational AI.
+                </p>
+                <div class="lead-meta">
+                    <span>May 15, 2026</span>
+                    <span>San Francisco</span>
+                    <span class="source-mark">OPENAI</span>
+                </div>
+            </article>
+
+            <!-- Secondary Stories -->
+            <div class="stories-grid">
+                <article class="story">
+                    <div class="story-kicker kicker-product">Product</div>
+                    <h3 class="story-headline">
+                        <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank">
+                            Codex Goes Remote: Now Available From Any Device, Anywhere
+                        </a>
+                    </h3>
+                    <p class="story-dek">Developers can now access Codex from any location, removing previous device restrictions.</p>
+                    <div class="story-meta">
+                        <span>May 14</span>
+                        <span class="source-mark">OPENAI</span>
+                    </div>
+                </article>
+
+                <article class="story">
+                    <div class="story-kicker kicker-safety">Safety</div>
+                    <h3 class="story-headline">
+                        <a href="https://openai.com/index/chatgpt-recognize-context-in-sensitive-conversations/" target="_blank">
+                            ChatGPT Improves Context Recognition in Sensitive Conversations
+                        </a>
+                    </h3>
+                    <p class="story-dek">New safety measures improve nuanced understanding for safer, more contextual interactions.</p>
+                    <div class="story-meta">
+                        <span>May 14</span>
+                        <span class="source-mark">OPENAI</span>
+                    </div>
+                </article>
+
+                <article class="story">
+                    <div class="story-kicker kicker-engineering">Engineering</div>
+                    <h3 class="story-headline">
+                        <a href="https://openai.com/index/building-codex-windows-sandbox/" target="_blank">
+                            Windows Sandbox Built for Codex Execution
+                        </a>
+                    </h3>
+                    <p class="story-dek">New secure environment enables safe Codex deployment on Windows systems.</p>
+                    <div class="story-meta">
+                        <span>May 13</span>
+                        <span class="source-mark">OPENAI</span>
+                    </div>
+                </article>
+
+                <article class="story">
+                    <div class="story-kicker kicker-security">Security</div>
+                    <h3 class="story-headline">
+                        <a href="https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/" target="_blank">
+                            OpenAI Responds to TanStack npm Supply Chain Attack
+                        </a>
+                    </h3>
+                    <p class="story-dek">Official security response and measures following the TanStack npm incident.</p>
+                    <div class="story-meta">
+                        <span>May 13</span>
+                        <span class="source-mark">OPENAI</span>
+                    </div>
+                </article>
+
+                <article class="story">
+                    <div class="story-kicker kicker-research">Research</div>
+                    <h3 class="story-headline">
+                        <a href="https://openai.com/index/what-parameter-golf-taught-us/" target="_blank">
+                            What Parameter Golf Taught Us About Model Optimization
+                        </a>
+                    </h3>
+                    <p class="story-dek">Research insights from Parameter Golf project reveal new optimization strategies.</p>
+                    <div class="story-meta">
+                        <span>May 12</span>
+                        <span class="source-mark">OPENAI</span>
+                    </div>
+                </article>
+
+                <article class="story">
+                    <div class="story-kicker kicker-company">Company</div>
+                    <h3 class="story-headline">
+                        <a href="https://openai.com/index/openai-launches-the-deployment-company/" target="_blank">
+                            OpenAI Deployment Company Launches for Enterprise
+                        </a>
+                    </h3>
+                    <p class="story-dek">New subsidiary focused on enterprise AI deployment and integration solutions.</p>
+                    <div class="story-meta">
+                        <span>May 11</span>
+                        <span class="source-mark">OPENAI</span>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Stats strip -->
+            <div class="stats-strip">
+                <div class="stat-item">
+                    <div class="stat-num">9</div>
                     <div class="stat-label">OpenAI</div>
                 </div>
-            </div>
-            <div class="stat">
-                <div class="stat-icon anthropic">🧠</div>
-                <div>
-                    <div class="stat-num anthropic">4</div>
+                <div class="stat-item">
+                    <div class="stat-num">4</div>
                     <div class="stat-label">Anthropic</div>
                 </div>
-            </div>
-            <div class="stat">
-                <div class="stat-icon google">🔍</div>
-                <div>
-                    <div class="stat-num google">1</div>
-                    <div class="stat-label">Google AI</div>
+                <div class="stat-item">
+                    <div class="stat-num">1</div>
+                    <div class="stat-label">Google</div>
                 </div>
-            </div>
-            <div class="stat">
-                <div class="stat-icon total">📈</div>
-                <div>
-                    <div class="stat-num total">14</div>
+                <div class="stat-item">
+                    <div class="stat-num">14</div>
                     <div class="stat-label">Total</div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Grid -->
-        <div class="main-grid">
-            <!-- Articles (3x3 grid) -->
-            <div class="articles-section">
-                <div class="section-label">📰 Latest Articles (3×3 Grid)</div>
-                <div class="articles-grid">
-                    <!-- Row 1 -->
-                    <a href="https://openai.com/index/personal-finance-chatgpt/" target="_blank" class="article-card">
-                        <div class="article-top">
-                            <span class="tag tag-product">Product</span>
-                            <span class="article-date">May 15</span>
-                        </div>
-                        <div class="article-title">Personal Finance in ChatGPT</div>
-                        <div class="article-bottom">
-                            <span class="source-tag source-openai">OpenAI</span>
-                            <span class="read-btn">Read →</span>
-                        </div>
-                    </a>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">In Brief</div>
+            <ul class="brief-list">
+                <li class="brief-item">
+                    OpenAI launches Personal Finance in ChatGPT
+                    <span class="brief-source">OpenAI · Product</span>
+                </li>
+                <li class="brief-item">
+                    Codex now available "from anywhere"
+                    <span class="brief-source">OpenAI · Product</span>
+                </li>
+                <li class="brief-item">
+                    ChatGPT improves context recognition
+                    <span class="brief-source">OpenAI · Safety</span>
+                </li>
+                <li class="brief-item">
+                    Windows sandbox for Codex released
+                    <span class="brief-source">OpenAI · Engineering</span>
+                </li>
+                <li class="brief-item">
+                    OpenAI responds to TanStack npm attack
+                    <span class="brief-source">OpenAI · Security</span>
+                </li>
+                <li class="brief-item">
+                    New "Parameter Golf" research published
+                    <span class="brief-source">OpenAI · Research</span>
+                </li>
+                <li class="brief-item">
+                    OpenAI Deployment Company launched
+                    <span class="brief-source">OpenAI · Company</span>
+                </li>
+                <li class="brief-item">
+                    Claude Design tool launched by Anthropic
+                    <span class="brief-source">Anthropic · Product</span>
+                </li>
+                <li class="brief-item">
+                    Project Glasswing security initiative
+                    <span class="brief-source">Anthropic · Company</span>
+                </li>
+                <li class="brief-item">
+                    AI Impact Summit India 2026
+                    <span class="brief-source">Google AI · Event</span>
+                </li>
+            </ul>
+        </aside>
+    </main>
 
-                    <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" class="article-card">
-                        <div class="article-top">
-                            <span class="tag tag-product">Product</span>
-                            <span class="article-date">May 14</span>
-                        </div>
-                        <div class="article-title">Codex from Anywhere</div>
-                        <div class="article-bottom">
-                            <span class="source-tag source-openai">OpenAI</span>
-                            <span class="read-btn">Read →</span>
-                        </div>
-                    </a>
-
-                    <a href="https://openai.com/index/chatgpt-recognize-context-in-sensitive-conversations/" target="_blank" class="article-card">
-                        <div class="article-top">
-                            <span class="tag tag-safety">Safety</span>
-                            <span class="article-date">May 14</span>
-                        </div>
-                        <div class="article-title">Context in Sensitive Conversations</div>
-                        <div class="article-bottom">
-                            <span class="source-tag source-openai">OpenAI</span>
-                            <span class="read-btn">Read →</span>
-                        </div>
-                    </a>
-
-                    <!-- Row 2 -->
-                    <a href="https://openai.com/index/building-codex-windows-sandbox/" target="_blank" class="article-card">
-                        <div class="article-top">
-                            <span class="tag tag-engineering">Engineering</span>
-                            <span class="article-date">May 13</span>
-                        </div>
-                        <div class="article-title">Codex Windows Sandbox</div>
-                        <div class="article-bottom">
-                            <span class="source-tag source-openai">OpenAI</span>
-                            <span class="read-btn">Read →</span>
-                        </div>
-                    </a>
-
-                    <a href="https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/" target="_blank" class="article-card">
-                        <div class="article-top">
-                            <span class="tag tag-security">Security</span>
-                            <span class="article-date">May 13</span>
-                        </div>
-                        <div class="article-title">TanStack npm Attack Response</div>
-                        <div class="article-bottom">
-                            <span class="source-tag source-openai">OpenAI</span>
-                            <span class="read-btn">Read →</span>
-                        </div>
-                    </a>
-
-                    <a href="https://openai.com/index/what-parameter-golf-taught-us/" target="_blank" class="article-card">
-                        <div class="article-top">
-                            <span class="tag tag-research">Research</span>
-                            <span class="article-date">May 12</span>
-                        </div>
-                        <div class="article-title">Parameter Golf Research</div>
-                        <div class="article-bottom">
-                            <span class="source-tag source-openai">OpenAI</span>
-                            <span class="read-btn">Read →</span>
-                        </div>
-                    </a>
-
-                    <!-- Row 3 -->
-                    <a href="https://www.anthropic.com/news" target="_blank" class="article-card">
-                        <div class="article-top">
-                            <span class="tag tag-product">Product</span>
-                            <span class="article-date">Apr 17</span>
-                        </div>
-                        <div class="article-title">Claude Design by Anthropic Labs</div>
-                        <div class="article-bottom">
-                            <span class="source-tag source-anthropic">Anthropic</span>
-                            <span class="read-btn">Read →</span>
-                        </div>
-                    </a>
-
-                    <a href="https://www.anthropic.com/news" target="_blank" class="article-card">
-                        <div class="article-top">
-                            <span class="tag tag-company">Company</span>
-                            <span class="article-date">Apr 7</span>
-                        </div>
-                        <div class="article-title">Project Glasswing Initiative</div>
-                        <div class="article-bottom">
-                            <span class="source-tag source-anthropic">Anthropic</span>
-                            <span class="read-btn">Read →</span>
-                        </div>
-                    </a>
-
-                    <a href="https://blog.google/innovation-and-ai/technology/ai/ai-impact-summit-2026-india/" target="_blank" class="article-card">
-                        <div class="article-top">
-                            <span class="tag tag-event">Event</span>
-                            <span class="article-date">May 2026</span>
-                        </div>
-                        <div class="article-title">AI Impact Summit India 2026</div>
-                        <div class="article-bottom">
-                            <span class="source-tag source-google">Google</span>
-                            <span class="read-btn">Read →</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Right: Highlights -->
-            <div class="highlights-section">
-                <div class="section-label">🎯 Key Highlights</div>
-                <div class="highlights-card">
-                    <div class="highlights-title">⚡ Last 6 Hours</div>
-                    <div class="highlight-item">OpenAI launches Personal Finance in ChatGPT</div>
-                    <div class="highlight-item">Codex now available "from anywhere"</div>
-                    <div class="highlight-item">ChatGPT improves context recognition</div>
-                    <div class="highlight-item">Windows sandbox for Codex released</div>
-                    <div class="highlight-item">OpenAI responds to TanStack npm attack</div>
-                    <div class="highlight-item">New "Parameter Golf" research</div>
-                    <div class="highlight-item">OpenAI Deployment Company launched</div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <footer class="footer">
+        AI Daily — Generated by Kira · Auto-updates every 6 hours · Sources: OpenAI, Anthropic, Google AI
+    </footer>
 </body>
 </html>
