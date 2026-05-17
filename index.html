@@ -3,44 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLM News Report - May 2026</title>
+    <title>LLM News Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #f0f4f8;
-            --card: #ffffff;
-            --text: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #94a3b8;
-            --cyan: #0891b2;
-            --violet: #7c3aed;
-            --orange: #ea580c;
-            --green: #16a34a;
-            --blue: #2563eb;
-            --red: #dc2626;
-            --border: #e2e8f0;
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 16px;
+            background: #f1f5f9;
+            color: #0f172a;
+            height: 100vh;
             overflow: hidden;
+            padding: 12px;
         }
 
         .dashboard {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            height: calc(100vh - 32px);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto auto 1fr;
+            gap: 10px;
         }
 
         /* HEADER */
@@ -48,62 +33,67 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: #fff;
             padding: 8px 16px;
-            background: var(--card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            flex-shrink: 0;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .logo {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--cyan), var(--violet));
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
         }
 
-        .header-title {
+        .header h1 {
             font-size: 1.1rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--cyan), var(--violet));
+            font-weight: 800;
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .header-subtitle {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 2px;
+        .header-sub {
+            font-size: 0.65rem;
+            color: #94a3b8;
+            margin-top: 1px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .live-badge {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            background: #ecfdf5;
-            border: 1px solid #a7f3d0;
+            gap: 5px;
+            padding: 3px 10px;
+            background: #dcfce7;
+            border: 1px solid #86efac;
             border-radius: 100px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--green);
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #16a34a;
         }
 
         .live-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--green);
+            width: 5px;
+            height: 5px;
+            background: #16a34a;
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -113,38 +103,36 @@
             50% { opacity: 0.4; }
         }
 
-        .update-time {
-            font-size: 0.7rem;
-            color: var(--text-muted);
+        .time {
+            font-size: 0.65rem;
+            color: #94a3b8;
         }
 
-        /* STATS ROW */
-        .stats-row {
+        /* STATS */
+        .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            flex-shrink: 0;
+            gap: 8px;
         }
 
-        .stat-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 10px 14px;
+        .stat {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 8px 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            gap: 8px;
         }
 
         .stat-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
+            font-size: 14px;
             flex-shrink: 0;
         }
 
@@ -153,142 +141,141 @@
         .stat-icon.google { background: #dbeafe; }
         .stat-icon.total { background: linear-gradient(135deg, #e0f2fe, #f3e8ff); }
 
-        .stat-info { flex: 1; }
-        .stat-value {
-            font-size: 1.3rem;
+        .stat-num {
+            font-size: 1.1rem;
             font-weight: 800;
             line-height: 1;
         }
-        .stat-value.openai-c { color: var(--cyan); }
-        .stat-value.anthropic-c { color: var(--violet); }
-        .stat-value.google-c { color: var(--blue); }
-        .stat-value.total-c {
-            background: linear-gradient(135deg, var(--cyan), var(--violet));
+
+        .stat-num.openai { color: #0891b2; }
+        .stat-num.anthropic { color: #7c3aed; }
+        .stat-num.google { color: #2563eb; }
+        .stat-num.total {
+            background: linear-gradient(135deg, #0891b2, #7c3aed);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .stat-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            font-weight: 500;
+            font-size: 0.6rem;
+            color: #94a3b8;
+            font-weight: 600;
             margin-top: 2px;
         }
 
-        /* MAIN CONTENT */
-        .main-content {
+        /* MAIN GRID */
+        .main-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 12px;
-            flex: 1;
-            min-height: 0;
-        }
-
-        .left-column, .right-column {
-            display: flex;
-            flex-direction: column;
+            grid-template-columns: 1fr 320px;
             gap: 10px;
             min-height: 0;
         }
 
-        .section-title {
+        /* LEFT: ARTICLES */
+        .articles-section {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 8px;
-            font-size: 0.8rem;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: var(--text-muted);
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             flex-shrink: 0;
         }
 
-        .section-title span:first-child { font-size: 1rem; }
-
-        /* NEWS GRID COMPACT */
-        .news-grid {
+        .articles-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
             gap: 8px;
-            overflow-y: auto;
-            padding-right: 4px;
+            flex: 1;
+            min-height: 0;
         }
 
-        .news-grid::-webkit-scrollbar { width: 4px; }
-        .news-grid::-webkit-scrollbar-track { background: transparent; }
-        .news-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-        .news-card {
-            background: var(--card);
-            border: 1px solid var(--border);
+        .article-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
             border-radius: 10px;
-            padding: 12px;
-            transition: all 0.15s;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
+            padding: 10px 12px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
+            transition: all 0.15s;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            overflow: hidden;
         }
 
-        .news-card:hover {
-            border-color: var(--cyan);
+        .article-card:hover {
+            border-color: #0ea5e9;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
-        .news-header-compact {
+        .article-top {
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
-        .news-type {
-            font-size: 0.6rem;
+        .tag {
+            font-size: 0.55rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
             padding: 2px 8px;
             border-radius: 4px;
         }
 
-        .type-product { background: #e0f2fe; color: #0e7490; }
-        .type-safety { background: #d1fae5; color: #047857; }
-        .type-engineering { background: #ffedd5; color: #b45309; }
-        .type-company { background: #f3e8ff; color: #7c3aed; }
-        .type-research { background: #dbeafe; color: #1d4ed8; }
-        .type-security { background: #fee2e2; color: #b91c1c; }
-        .type-event { background: #fce7f3; color: #be185d; }
+        .tag-product { background: #e0f2fe; color: #0e7490; }
+        .tag-safety { background: #d1fae5; color: #047857; }
+        .tag-engineering { background: #ffedd5; color: #b45309; }
+        .tag-company { background: #f3e8ff; color: #7c3aed; }
+        .tag-research { background: #dbeafe; color: #1d4ed8; }
+        .tag-security { background: #fee2e2; color: #b91c1c; }
+        .tag-event { background: #fce7f3; color: #be185d; }
 
-        .news-date {
-            font-size: 0.65rem;
-            color: var(--text-muted);
+        .article-date {
+            font-size: 0.6rem;
+            color: #94a3b8;
             font-weight: 500;
         }
 
-        .news-title-compact {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text);
+        .article-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #0f172a;
             line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            flex: 1;
         }
 
-        .news-source {
+        .article-bottom {
             display: flex;
             align-items: center;
-            gap: 6px;
+            justify-content: space-between;
             margin-top: auto;
-            padding-top: 6px;
-            border-top: 1px solid var(--border);
+            padding-top: 5px;
+            border-top: 1px solid #f1f5f9;
         }
 
-        .source-badge {
-            font-size: 0.6rem;
-            font-weight: 600;
+        .source-tag {
+            font-size: 0.55rem;
+            font-weight: 700;
             padding: 2px 8px;
             border-radius: 4px;
         }
@@ -297,84 +284,83 @@
         .source-anthropic { background: #f3e8ff; color: #7c3aed; }
         .source-google { background: #dbeafe; color: #2563eb; }
 
-        .read-link {
-            margin-left: auto;
+        .read-btn {
             font-size: 0.65rem;
-            color: var(--cyan);
-            font-weight: 600;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            padding: 4px 10px;
+            border-radius: 6px;
             text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .read-btn:hover {
+            box-shadow: 0 2px 8px rgba(14,165,233,0.3);
+            transform: translateY(-1px);
+        }
+
+        /* RIGHT: HIGHLIGHTS */
+        .highlights-section {
             display: flex;
-            align-items: center;
-            gap: 3px;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 0;
         }
 
-        .read-link:hover { text-decoration: underline; }
-
-        /* HIGHLIGHTS */
         .highlights-card {
-            background: linear-gradient(135deg, rgba(8,145,178,0.05), rgba(124,58,237,0.05));
-            border: 1px solid rgba(8,145,178,0.15);
-            border-radius: 12px;
-            padding: 14px;
+            background: linear-gradient(135deg, rgba(14,165,233,0.04), rgba(139,92,246,0.04));
+            border: 1px solid rgba(14,165,233,0.12);
+            border-radius: 10px;
+            padding: 12px;
             flex: 1;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow: hidden;
         }
-
-        .highlights-card::-webkit-scrollbar { width: 4px; }
-        .highlights-card::-webkit-scrollbar-track { background: transparent; }
-        .highlights-card::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
         .highlights-title {
             font-size: 0.75rem;
             font-weight: 700;
-            color: var(--text);
-            margin-bottom: 10px;
+            color: #0f172a;
             display: flex;
             align-items: center;
             gap: 6px;
+            flex-shrink: 0;
         }
 
-        .highlight-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .highlight-list li {
+        .highlight-item {
             display: flex;
             align-items: flex-start;
             gap: 8px;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            line-height: 1.4;
-            padding: 6px 8px;
-            background: rgba(255,255,255,0.6);
+            padding: 8px 10px;
+            background: rgba(255,255,255,0.7);
             border-radius: 6px;
+            font-size: 0.72rem;
+            color: #475569;
+            line-height: 1.4;
+            flex-shrink: 0;
         }
 
-        .highlight-list li::before {
+        .highlight-item::before {
             content: "⚡";
             font-size: 0.8rem;
             flex-shrink: 0;
-        }
-
-        /* FOOTER */
-        .footer {
-            text-align: center;
-            padding: 6px;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            flex-shrink: 0;
+            margin-top: 1px;
         }
 
         /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .articles-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 900px) {
-            .main-content { grid-template-columns: 1fr; }
-            .news-grid { grid-template-columns: 1fr; }
-            .stats-row { grid-template-columns: repeat(2, 1fr); }
-            body { overflow: auto; }
+            body { overflow: auto; height: auto; }
             .dashboard { height: auto; }
+            .main-grid { grid-template-columns: 1fr; }
+            .articles-grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -385,191 +371,184 @@
             <div class="header-left">
                 <div class="logo">📊</div>
                 <div>
-                    <div class="header-title">LLM News Report</div>
-                    <div class="header-subtitle">OpenAI · Anthropic · Google AI</div>
+                    <h1>LLM News Dashboard</h1>
+                    <div class="header-sub">OpenAI · Anthropic · Google AI</div>
                 </div>
             </div>
-            <div style="display:flex;align-items:center;gap:12px;">
+            <div class="header-right">
                 <div class="live-badge">
                     <div class="live-dot"></div>
                     LIVE
                 </div>
-                <div class="update-time">May 17, 2026</div>
+                <div class="time">May 17, 22:20 UTC</div>
             </div>
         </div>
 
         <!-- Stats -->
-        <div class="stats-row">
-            <div class="stat-card">
+        <div class="stats">
+            <div class="stat">
                 <div class="stat-icon openai">🤖</div>
-                <div class="stat-info">
-                    <div class="stat-value openai-c">9</div>
-                    <div class="stat-label">OpenAI Updates</div>
+                <div>
+                    <div class="stat-num openai">9</div>
+                    <div class="stat-label">OpenAI</div>
                 </div>
             </div>
-            <div class="stat-card">
+            <div class="stat">
                 <div class="stat-icon anthropic">🧠</div>
-                <div class="stat-info">
-                    <div class="stat-value anthropic-c">4</div>
-                    <div class="stat-label">Anthropic Updates</div>
+                <div>
+                    <div class="stat-num anthropic">4</div>
+                    <div class="stat-label">Anthropic</div>
                 </div>
             </div>
-            <div class="stat-card">
+            <div class="stat">
                 <div class="stat-icon google">🔍</div>
-                <div class="stat-info">
-                    <div class="stat-value google-c">1</div>
-                    <div class="stat-label">Google AI Updates</div>
+                <div>
+                    <div class="stat-num google">1</div>
+                    <div class="stat-label">Google AI</div>
                 </div>
             </div>
-            <div class="stat-card">
+            <div class="stat">
                 <div class="stat-icon total">📈</div>
-                <div class="stat-info">
-                    <div class="stat-value total-c">14</div>
-                    <div class="stat-label">Total Items</div>
+                <div>
+                    <div class="stat-num total">14</div>
+                    <div class="stat-label">Total</div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Left: News Grid -->
-            <div class="left-column">
-                <div class="section-title"><span>📰</span> Latest Updates</div>
-                <div class="news-grid">
-                    <!-- OpenAI -->
-                    <a href="https://openai.com/index/personal-finance-chatgpt/" target="_blank" class="news-card">
-                        <div class="news-header-compact">
-                            <span class="news-type type-product">Product</span>
-                            <span class="news-date">May 15</span>
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Articles (3x3 grid) -->
+            <div class="articles-section">
+                <div class="section-label">📰 Latest Articles (3×3 Grid)</div>
+                <div class="articles-grid">
+                    <!-- Row 1 -->
+                    <a href="https://openai.com/index/personal-finance-chatgpt/" target="_blank" class="article-card">
+                        <div class="article-top">
+                            <span class="tag tag-product">Product</span>
+                            <span class="article-date">May 15</span>
                         </div>
-                        <div class="news-title-compact">Personal Finance experience in ChatGPT</div>
-                        <div class="news-source">
-                            <span class="source-badge source-openai">OpenAI</span>
-                            <span class="read-link">Read →</span>
-                        </div>
-                    </a>
-
-                    <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" class="news-card">
-                        <div class="news-header-compact">
-                            <span class="news-type type-product">Product</span>
-                            <span class="news-date">May 14</span>
-                        </div>
-                        <div class="news-title-compact">Work with Codex from anywhere</div>
-                        <div class="news-source">
-                            <span class="source-badge source-openai">OpenAI</span>
-                            <span class="read-link">Read →</span>
+                        <div class="article-title">Personal Finance in ChatGPT</div>
+                        <div class="article-bottom">
+                            <span class="source-tag source-openai">OpenAI</span>
+                            <span class="read-btn">Read →</span>
                         </div>
                     </a>
 
-                    <a href="https://openai.com/index/chatgpt-recognize-context-in-sensitive-conversations/" target="_blank" class="news-card">
-                        <div class="news-header-compact">
-                            <span class="news-type type-safety">Safety</span>
-                            <span class="news-date">May 14</span>
+                    <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" class="article-card">
+                        <div class="article-top">
+                            <span class="tag tag-product">Product</span>
+                            <span class="article-date">May 14</span>
                         </div>
-                        <div class="news-title-compact">Better context in sensitive conversations</div>
-                        <div class="news-source">
-                            <span class="source-badge source-openai">OpenAI</span>
-                            <span class="read-link">Read →</span>
-                        </div>
-                    </a>
-
-                    <a href="https://openai.com/index/building-codex-windows-sandbox/" target="_blank" class="news-card">
-                        <div class="news-header-compact">
-                            <span class="news-type type-engineering">Engineering</span>
-                            <span class="news-date">May 13</span>
-                        </div>
-                        <div class="news-title-compact">Codex sandbox for Windows</div>
-                        <div class="news-source">
-                            <span class="source-badge source-openai">OpenAI</span>
-                            <span class="read-link">Read →</span>
+                        <div class="article-title">Codex from Anywhere</div>
+                        <div class="article-bottom">
+                            <span class="source-tag source-openai">OpenAI</span>
+                            <span class="read-btn">Read →</span>
                         </div>
                     </a>
 
-                    <a href="https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/" target="_blank" class="news-card">
-                        <div class="news-header-compact">
-                            <span class="news-type type-security">Security</span>
-                            <span class="news-date">May 13</span>
+                    <a href="https://openai.com/index/chatgpt-recognize-context-in-sensitive-conversations/" target="_blank" class="article-card">
+                        <div class="article-top">
+                            <span class="tag tag-safety">Safety</span>
+                            <span class="article-date">May 14</span>
                         </div>
-                        <div class="news-title-compact">Response to TanStack npm attack</div>
-                        <div class="news-source">
-                            <span class="source-badge source-openai">OpenAI</span>
-                            <span class="read-link">Read →</span>
-                        </div>
-                    </a>
-
-                    <a href="https://openai.com/index/what-parameter-golf-taught-us/" target="_blank" class="news-card">
-                        <div class="news-header-compact">
-                            <span class="news-type type-research">Research</span>
-                            <span class="news-date">May 12</span>
-                        </div>
-                        <div class="news-title-compact">What Parameter Golf taught us</div>
-                        <div class="news-source">
-                            <span class="source-badge source-openai">OpenAI</span>
-                            <span class="read-link">Read →</span>
+                        <div class="article-title">Context in Sensitive Conversations</div>
+                        <div class="article-bottom">
+                            <span class="source-tag source-openai">OpenAI</span>
+                            <span class="read-btn">Read →</span>
                         </div>
                     </a>
 
-                    <!-- Anthropic -->
-                    <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
-                        <div class="news-header-compact">
-                            <span class="news-type type-product">Product</span>
-                            <span class="news-date">Apr 17</span>
+                    <!-- Row 2 -->
+                    <a href="https://openai.com/index/building-codex-windows-sandbox/" target="_blank" class="article-card">
+                        <div class="article-top">
+                            <span class="tag tag-engineering">Engineering</span>
+                            <span class="article-date">May 13</span>
                         </div>
-                        <div class="news-title-compact">Claude Design by Anthropic Labs</div>
-                        <div class="news-source">
-                            <span class="source-badge source-anthropic">Anthropic</span>
-                            <span class="read-link">Read →</span>
-                        </div>
-                    </a>
-
-                    <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
-                        <div class="news-header-compact">
-                            <span class="news-type type-company">Company</span>
-                            <span class="news-date">Apr 7</span>
-                        </div>
-                        <div class="news-title-compact">Project Glasswing security initiative</div>
-                        <div class="news-source">
-                            <span class="source-badge source-anthropic">Anthropic</span>
-                            <span class="read-link">Read →</span>
+                        <div class="article-title">Codex Windows Sandbox</div>
+                        <div class="article-bottom">
+                            <span class="source-tag source-openai">OpenAI</span>
+                            <span class="read-btn">Read →</span>
                         </div>
                     </a>
 
-                    <!-- Google -->
-                    <a href="https://blog.google/innovation-and-ai/technology/ai/ai-impact-summit-2026-india/" target="_blank" class="news-card" style="grid-column: span 2;">
-                        <div class="news-header-compact">
-                            <span class="news-type type-event">Event</span>
-                            <span class="news-date">May 2026</span>
+                    <a href="https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/" target="_blank" class="article-card">
+                        <div class="article-top">
+                            <span class="tag tag-security">Security</span>
+                            <span class="article-date">May 13</span>
                         </div>
-                        <div class="news-title-compact">AI Impact Summit 2026 India</div>
-                        <div class="news-source">
-                            <span class="source-badge source-google">Google AI</span>
-                            <span class="read-link">Read →</span>
+                        <div class="article-title">TanStack npm Attack Response</div>
+                        <div class="article-bottom">
+                            <span class="source-tag source-openai">OpenAI</span>
+                            <span class="read-btn">Read →</span>
+                        </div>
+                    </a>
+
+                    <a href="https://openai.com/index/what-parameter-golf-taught-us/" target="_blank" class="article-card">
+                        <div class="article-top">
+                            <span class="tag tag-research">Research</span>
+                            <span class="article-date">May 12</span>
+                        </div>
+                        <div class="article-title">Parameter Golf Research</div>
+                        <div class="article-bottom">
+                            <span class="source-tag source-openai">OpenAI</span>
+                            <span class="read-btn">Read →</span>
+                        </div>
+                    </a>
+
+                    <!-- Row 3 -->
+                    <a href="https://www.anthropic.com/news" target="_blank" class="article-card">
+                        <div class="article-top">
+                            <span class="tag tag-product">Product</span>
+                            <span class="article-date">Apr 17</span>
+                        </div>
+                        <div class="article-title">Claude Design by Anthropic Labs</div>
+                        <div class="article-bottom">
+                            <span class="source-tag source-anthropic">Anthropic</span>
+                            <span class="read-btn">Read →</span>
+                        </div>
+                    </a>
+
+                    <a href="https://www.anthropic.com/news" target="_blank" class="article-card">
+                        <div class="article-top">
+                            <span class="tag tag-company">Company</span>
+                            <span class="article-date">Apr 7</span>
+                        </div>
+                        <div class="article-title">Project Glasswing Initiative</div>
+                        <div class="article-bottom">
+                            <span class="source-tag source-anthropic">Anthropic</span>
+                            <span class="read-btn">Read →</span>
+                        </div>
+                    </a>
+
+                    <a href="https://blog.google/innovation-and-ai/technology/ai/ai-impact-summit-2026-india/" target="_blank" class="article-card">
+                        <div class="article-top">
+                            <span class="tag tag-event">Event</span>
+                            <span class="article-date">May 2026</span>
+                        </div>
+                        <div class="article-title">AI Impact Summit India 2026</div>
+                        <div class="article-bottom">
+                            <span class="source-tag source-google">Google</span>
+                            <span class="read-btn">Read →</span>
                         </div>
                     </a>
                 </div>
             </div>
 
             <!-- Right: Highlights -->
-            <div class="right-column">
-                <div class="section-title"><span>🎯</span> Key Highlights</div>
+            <div class="highlights-section">
+                <div class="section-label">🎯 Key Highlights</div>
                 <div class="highlights-card">
                     <div class="highlights-title">⚡ Last 6 Hours</div>
-                    <ul class="highlight-list">
-                        <li>OpenAI launches Personal Finance in ChatGPT</li>
-                        <li>Codex now available "from anywhere"</li>
-                        <li>ChatGPT improves context recognition</li>
-                        <li>Windows sandbox for Codex released</li>
-                        <li>OpenAI responds to TanStack npm attack</li>
-                        <li>New "Parameter Golf" research published</li>
-                        <li>OpenAI Deployment Company launched</li>
-                    </ul>
+                    <div class="highlight-item">OpenAI launches Personal Finance in ChatGPT</div>
+                    <div class="highlight-item">Codex now available "from anywhere"</div>
+                    <div class="highlight-item">ChatGPT improves context recognition</div>
+                    <div class="highlight-item">Windows sandbox for Codex released</div>
+                    <div class="highlight-item">OpenAI responds to TanStack npm attack</div>
+                    <div class="highlight-item">New "Parameter Golf" research</div>
+                    <div class="highlight-item">OpenAI Deployment Company launched</div>
                 </div>
             </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            Generated by Kira AI Assistant · Auto-updates every 6 hours
         </div>
     </div>
 </body>
