@@ -9,26 +9,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Source+Sans+Pro:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a1628;
-            --bg-light: #0f1d33;
-            --bg-card: #152238;
-            --bg-hover: #1a2d4d;
-            --ink: #f0f4ff;
-            --ink-light: #a3b3cc;
-            --ink-muted: #5a7094;
-            --rule: #1e3a5f;
-            --rule-light: #152238;
-            --gold: #d4af37;
-            --gold-light: #f4e4a6;
-            --gold-dim: #8a7a4a;
-            --accent: #60a5fa;
-            --accent-light: #1e3a5f;
-            --teal: #2dd4bf;
+            --bg: #ffffff;
+            --bg-light: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-hover: #f1f5f9;
+            --ink: #0f172a;
+            --ink-light: #475569;
+            --ink-muted: #94a3b8;
+            --rule: #e2e8f0;
+            --rule-light: #ffffff;
+            --gold: #1e3a8a;
+            --gold-light: #dbeafe;
+            --gold-dim: #64748b;
+            --accent: #1e40af;
+            --accent-light: #e2e8f0;
+            --teal: #0d9488;
             --teal-bg: rgba(45,212,191,0.1);
-            --navy: #3b82f6;
-            --violet: #a78bfa;
-            --olive: #84cc16;
-            --umber: #fbbf24;
+            --navy: #1e3a8a;
+            --violet: #7c3aed;
+            --olive: #65a30d;
+            --umber: #d97706;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -48,7 +48,7 @@
             margin: 0 auto;
             padding: 2.5rem 3rem 1rem;
             border-bottom: 1px solid var(--rule);
-            background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg) 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #3b82f6 100%); border-radius: 0 0 16px 16px; box-shadow: 0 4px 20px rgba(30,58,138,0.3);
         }
 
         .masthead-top {
@@ -64,7 +64,7 @@
             font-weight: 800;
             letter-spacing: -0.02em;
             line-height: 1;
-            color: var(--gold);
+            color: #ffffff;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
@@ -74,7 +74,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.18em;
-            color: var(--gold-dim);
+            color: rgba(255,255,255,0.7);
             margin-top: 0.5rem;
         }
 
@@ -84,7 +84,7 @@
             align-items: center;
             margin-top: 1rem;
             padding-top: 0.75rem;
-            border-top: 1px solid var(--rule);
+            border-top: 1px solid rgba(255,255,255,0.2);
             font-size: 0.72rem;
             color: var(--ink-light);
             text-transform: uppercase;
@@ -95,7 +95,7 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            color: var(--gold);
+            color: #ffffff;
             font-weight: 700;
         }
 
@@ -146,7 +146,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: var(--gold);
+            color: #ffffff;
             margin-bottom: 0.5rem;
         }
 
@@ -161,7 +161,7 @@
         }
 
         .lead-headline:hover {
-            color: var(--gold);
+            color: #ffffff;
         }
 
         .lead-headline a {
@@ -213,7 +213,7 @@
 
         .story:hover {
             background: var(--bg-hover);
-            border-color: var(--gold-dim);
+            border-color: rgba(255,255,255,0.7);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
@@ -229,7 +229,7 @@
         .kicker-product { color: var(--teal); }
         .kicker-safety { color: var(--olive); }
         .kicker-engineering { color: var(--umber); }
-        .kicker-security { color: var(--accent); }
+        .kicker-security { color: #1e40af; }
         .kicker-research { color: var(--navy); }
         .kicker-company { color: var(--violet); }
 
@@ -247,7 +247,7 @@
         }
 
         .story-headline a:hover {
-            color: var(--gold);
+            color: #ffffff;
             text-decoration: underline;
             text-underline-offset: 3px;
         }
@@ -275,7 +275,7 @@
             padding: 2px 8px;
             border-radius: 4px;
             background: var(--accent-light);
-            color: var(--accent);
+            color: #1e40af;
             border: 1px solid var(--rule);
         }
 
@@ -290,7 +290,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.14em;
-            color: var(--gold);
+            color: #ffffff;
             padding-bottom: 0.75rem;
             border-bottom: 2px solid var(--gold);
             margin-bottom: 1rem;
@@ -301,7 +301,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.14em;
-            color: var(--gold);
+            color: #ffffff;
             padding-bottom: 0.75rem;
             border-bottom: 2px solid var(--gold);
             margin-bottom: 1rem;
@@ -328,7 +328,7 @@
             content: '→';
             position: absolute;
             left: 0;
-            color: var(--gold);
+            color: #ffffff;
             font-weight: 700;
             font-size: 0.8rem;
         }
@@ -344,7 +344,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--gold-dim);
+            color: rgba(255,255,255,0.7);
         }
 
         /* Stats bar - subtle */
@@ -369,7 +369,7 @@
             font-size: 1.6rem;
             font-weight: 700;
             line-height: 1;
-            color: var(--gold);
+            color: #ffffff;
         }
 
         .stat-label {
@@ -385,7 +385,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 1rem 3rem;
-            border-top: 1px solid var(--rule);
+            border-top: 1px solid rgba(255,255,255,0.2);
             font-size: 0.7rem;
             color: var(--ink-muted);
             text-align: center;
