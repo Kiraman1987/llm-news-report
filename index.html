@@ -64,7 +64,7 @@
             font-weight: 800;
             letter-spacing: -0.02em;
             line-height: 1;
-            color: #ffffff;
+            color: #1e3a8a;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
@@ -95,7 +95,7 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            color: #ffffff;
+            color: #1e3a8a;
             font-weight: 700;
         }
 
@@ -146,7 +146,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: #ffffff;
+            color: #1e3a8a;
             margin-bottom: 0.5rem;
         }
 
@@ -161,7 +161,7 @@
         }
 
         .lead-headline:hover {
-            color: #ffffff;
+            color: #1e3a8a;
         }
 
         .lead-headline a {
@@ -247,7 +247,7 @@
         }
 
         .story-headline a:hover {
-            color: #ffffff;
+            color: #1e3a8a;
             text-decoration: underline;
             text-underline-offset: 3px;
         }
@@ -290,9 +290,9 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.14em;
-            color: #ffffff;
+            color: #1e3a8a;
             padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--gold);
+            border-bottom: 2px solid #1e3a8a;
             margin-bottom: 1rem;
         }
 
@@ -301,9 +301,9 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.14em;
-            color: #ffffff;
+            color: #1e3a8a;
             padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--gold);
+            border-bottom: 2px solid #1e3a8a;
             margin-bottom: 1rem;
         }
 
@@ -328,7 +328,7 @@
             content: '→';
             position: absolute;
             left: 0;
-            color: #ffffff;
+            color: #1e3a8a;
             font-weight: 700;
             font-size: 0.8rem;
         }
@@ -369,7 +369,7 @@
             font-size: 1.6rem;
             font-weight: 700;
             line-height: 1;
-            color: #ffffff;
+            color: #1e3a8a;
         }
 
         .stat-label {
@@ -380,8 +380,70 @@
             color: var(--ink-light);
         }
 
-        /* Footer */
-        .footer {
+        .model-release {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(30,58,138,0.05), rgba(59,130,246,0.05));
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+        }
+
+        .model-release-header {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--navy);
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .model-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .model-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--rule-light);
+            font-size: 0.82rem;
+            color: var(--ink);
+        }
+
+        .model-item:last-child {
+            border-bottom: none;
+        }
+
+        .model-badge {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .model-badge.openai { background: #dbeafe; color: #1e40af; }
+        .model-badge.anthropic { background: #f3e8ff; color: #7c3aed; }
+        .model-badge.google { background: #dcfce7; color: #15803d; }
+        .model-badge.meta { background: #ffedd5; color: #c2410c; }
+
+        .model-name {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .model-date {
+            font-size: 0.65rem;
+            color: var(--ink-muted);
+            margin-left: auto;
+        }
             max-width: 1200px;
             margin: 0 auto;
             padding: 1rem 3rem;
@@ -593,6 +655,37 @@
                     <span class="brief-source">Google AI · Event</span>
                 </li>
             </ul>
+            <div class="model-release">
+                <div class="model-release-header">🚀 Model Releases</div>
+                <ul class="model-list">
+                    <li class="model-item">
+                        <span class="model-badge openai">OpenAI</span>
+                        <span class="model-name">GPT-4.5 Preview</span>
+                        <span class="model-date">May 2026</span>
+                    </li>
+                    <li class="model-item">
+                        <span class="model-badge openai">OpenAI</span>
+                        <span class="model-name">Codex Agent</span>
+                        <span class="model-date">May 2026</span>
+                    </li>
+                    <li class="model-item">
+                        <span class="model-badge anthropic">Anthropic</span>
+                        <span class="model-name">Claude 4 Opus</span>
+                        <span class="model-date">Apr 2026</span>
+                    </li>
+                    <li class="model-item">
+                        <span class="model-badge google">Google</span>
+                        <span class="model-name">Gemini 2.5 Pro</span>
+                        <span class="model-date">May 2026</span>
+                    </li>
+                    <li class="model-item">
+                        <span class="model-badge meta">Meta</span>
+                        <span class="model-name">Llama 4</span>
+                        <span class="model-date">Expected 2026</span>
+                    </li>
+                </ul>
+            </div>
+
         </aside>
     </main>
 
