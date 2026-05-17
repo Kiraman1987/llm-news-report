@@ -9,23 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0D0D0D;
-            --bg-secondary: #161616;
-            --bg-card: #1A1A1A;
-            --bg-card-hover: #1E1E1E;
-            --text-primary: #FFFFFF;
-            --text-secondary: #A1A1AA;
-            --text-muted: #52525B;
-            --accent-cyan: #00D4FF;
-            --accent-violet: #A855F7;
-            --accent-orange: #F97316;
-            --accent-green: #22C55E;
-            --accent-blue: #3B82F6;
-            --accent-gradient: linear-gradient(135deg, #00D4FF, #A855F7);
-            --border-color: #27272A;
-            --success: #22C55E;
-            --danger: #EF4444;
-            --star-color: #FBBF24;
+            --bg-primary: #FAFAFA;
+            --bg-secondary: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --bg-card-hover: #F8FAFC;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --accent-cyan: #0891B2;
+            --accent-violet: #7C3AED;
+            --accent-orange: #EA580C;
+            --accent-green: #16A34A;
+            --accent-blue: #2563EB;
+            --accent-gradient: linear-gradient(135deg, #0891B2, #7C3AED);
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
 
         * {
@@ -42,27 +42,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.03;
-            background: 
-                radial-gradient(circle at 20% 50%, var(--accent-cyan) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, var(--accent-violet) 0%, transparent 50%);
-            animation: bgPulse 15s ease-in-out infinite;
-        }
-
-        @keyframes bgPulse {
-            0%, 100% { opacity: 0.03; }
-            50% { opacity: 0.06; }
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -77,13 +56,14 @@
             text-align: center;
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 40px;
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-primary) 100%);
         }
 
         .badge {
             display: inline-block;
             padding: 6px 16px;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
+            background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(124, 58, 237, 0.1));
+            border: 1px solid rgba(8, 145, 178, 0.2);
             border-radius: 100px;
             font-size: 0.75rem;
             font-weight: 600;
@@ -124,209 +104,227 @@
             gap: 12px;
             margin: 48px 0 24px;
             padding-bottom: 16px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .section-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
-        }
-
-        .section-icon.openai {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .section-icon.anthropic {
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-        }
-
-        .section-icon.google {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            font-size: 1.5rem;
+            background: var(--bg-secondary);
+            box-shadow: var(--shadow-sm);
         }
 
         .section-title {
             font-size: 1.5rem;
-            font-weight: 600;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
         .section-count {
             margin-left: auto;
             font-size: 0.875rem;
+            font-weight: 600;
             color: var(--text-muted);
-            background: var(--bg-card);
-            padding: 4px 12px;
+            background: var(--bg-secondary);
+            padding: 6px 14px;
             border-radius: 100px;
+            box-shadow: var(--shadow-sm);
         }
 
         /* News Cards */
         .news-grid {
             display: grid;
-            gap: 16px;
+            gap: 20px;
         }
 
         .news-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            transition: all 0.2s ease;
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s ease;
             cursor: pointer;
             text-decoration: none;
             color: inherit;
             display: block;
+            box-shadow: var(--shadow-sm);
         }
 
         .news-card:hover {
             background: var(--bg-card-hover);
-            border-color: rgba(0, 212, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(8, 145, 178, 0.3);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
         .news-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
         }
 
         .news-type {
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 4px 10px;
-            border-radius: 6px;
+            letter-spacing: 0.08em;
+            padding: 5px 12px;
+            border-radius: 8px;
         }
 
         .type-product {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--accent-cyan);
+            background: linear-gradient(135deg, #E0F2FE, #BAE6FD);
+            color: #0369A1;
         }
 
         .type-safety {
-            background: rgba(34, 197, 94, 0.1);
-            color: var(--accent-green);
+            background: linear-gradient(135deg, #DCFCE7, #BBF7D0);
+            color: #15803D;
         }
 
         .type-engineering {
-            background: rgba(249, 115, 22, 0.1);
-            color: var(--accent-orange);
+            background: linear-gradient(135deg, #FFEDD5, #FED7AA);
+            color: #C2410C;
         }
 
         .type-company {
-            background: rgba(168, 85, 247, 0.1);
-            color: var(--accent-violet);
+            background: linear-gradient(135deg, #F3E8FF, #E9D5FF);
+            color: #7C3AED;
         }
 
         .type-research {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--accent-blue);
+            background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
+            color: #1D4ED8;
         }
 
         .type-security {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
+            background: linear-gradient(135deg, #FEE2E2, #FECACA);
+            color: #DC2626;
         }
 
         .news-date {
             font-size: 0.875rem;
             color: var(--text-muted);
+            font-weight: 500;
         }
 
         .news-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 8px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
             color: var(--text-primary);
+            line-height: 1.4;
         }
 
         .news-description {
-            font-size: 0.9375rem;
+            font-size: 1rem;
             color: var(--text-secondary);
             line-height: 1.6;
+            margin-bottom: 16px;
         }
 
         .news-link {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            margin-top: 12px;
-            font-size: 0.875rem;
-            color: var(--accent-cyan);
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+            color: white;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(8, 145, 178, 0.3);
         }
 
         .news-link:hover {
-            text-decoration: underline;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 12px -2px rgba(8, 145, 178, 0.4);
+        }
+
+        .news-link::after {
+            content: "→";
+            transition: transform 0.2s;
+        }
+
+        .news-link:hover::after {
+            transform: translateX(4px);
         }
 
         /* Highlights Section */
         .highlights-section {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(168, 85, 247, 0.05));
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 16px;
-            padding: 32px;
+            background: linear-gradient(135deg, rgba(8, 145, 178, 0.05), rgba(124, 58, 237, 0.05));
+            border: 2px solid rgba(8, 145, 178, 0.15);
+            border-radius: 20px;
+            padding: 36px;
             margin: 40px 0;
+            box-shadow: var(--shadow-md);
         }
 
         .highlights-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 20px;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            color: var(--text-primary);
         }
 
         .highlight-list {
             list-style: none;
             display: grid;
-            gap: 12px;
+            gap: 14px;
         }
 
         .highlight-list li {
             display: flex;
             align-items: flex-start;
-            gap: 12px;
-            font-size: 0.9375rem;
+            gap: 14px;
+            font-size: 1rem;
             color: var(--text-secondary);
+            padding: 8px 0;
         }
 
         .highlight-list li::before {
-            content: "→";
-            color: var(--accent-cyan);
-            font-weight: 600;
+            content: "⚡";
+            font-size: 1.1rem;
         }
 
         /* Stats Bar */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
+            gap: 20px;
             margin: 40px 0;
         }
 
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 28px;
             text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -334,36 +332,42 @@
         }
 
         .stat-label {
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 8px;
+            font-weight: 600;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 0;
+            padding: 48px 0;
             margin-top: 60px;
-            border-top: 1px solid var(--border-color);
+            border-top: 2px solid var(--border-color);
             color: var(--text-muted);
-            font-size: 0.875rem;
+            font-size: 0.9rem;
+            background: linear-gradient(0deg, #FFFFFF 0%, var(--bg-primary) 100%);
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 24px;
-            margin-top: 12px;
+            gap: 32px;
+            margin-top: 16px;
         }
 
         .footer-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.2s;
+            font-weight: 600;
+            transition: all 0.2s;
+            padding: 8px 16px;
+            border-radius: 8px;
         }
 
         .footer-links a:hover {
             color: var(--accent-cyan);
+            background: rgba(8, 145, 178, 0.05);
         }
 
         /* Responsive */
@@ -379,18 +383,20 @@
             .stats-bar {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .news-card {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
-    
     <div class="container">
         <header>
-            <div class="badge">Live Report</div>
+            <div class="badge">📡 Live Report</div>
             <h1>LLM News Report</h1>
             <p class="subtitle">Latest updates from OpenAI, Anthropic, and Google AI</p>
-            <p class="last-updated">Last updated: May 17, 2026 at 21:53 UTC</p>
+            <p class="last-updated">Last updated: May 17, 2026 at 22:00 UTC</p>
         </header>
 
         <!-- Stats -->
@@ -416,7 +422,7 @@
         <!-- Highlights -->
         <div class="highlights-section">
             <div class="highlights-title">
-                <span>⚡</span>
+                <span>🎯</span>
                 Key Highlights (Last 6 Hours)
             </div>
             <ul class="highlight-list">
@@ -432,169 +438,169 @@
 
         <!-- OpenAI Section -->
         <div class="section-header">
-            <div class="section-icon openai">🤖</div>
+            <div class="section-icon">🤖</div>
             <h2 class="section-title">OpenAI</h2>
             <span class="section-count">9 updates</span>
         </div>
 
         <div class="news-grid">
-            <a href="https://openai.com/index/personal-finance-chatgpt/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-product">Product</span>
                     <span class="news-date">May 15, 2026</span>
                 </div>
                 <div class="news-title">A new personal finance experience in ChatGPT</div>
                 <div class="news-description">ChatGPT now helps users manage personal finances with AI-powered insights and recommendations.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://openai.com/index/personal-finance-chatgpt/" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-product">Product</span>
                     <span class="news-date">May 14, 2026</span>
                 </div>
                 <div class="news-title">Work with Codex from anywhere</div>
                 <div class="news-description">Codex is now accessible remotely, enabling developers to code from any device and location.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://openai.com/index/chatgpt-recognize-context-in-sensitive-conversations/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-safety">Safety</span>
                     <span class="news-date">May 14, 2026</span>
                 </div>
                 <div class="news-title">Helping ChatGPT better recognize context in sensitive conversations</div>
                 <div class="news-description">Improvements to context understanding for more nuanced and safer interactions.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://openai.com/index/chatgpt-recognize-context-in-sensitive-conversations/" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://openai.com/index/building-codex-windows-sandbox/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-engineering">Engineering</span>
                     <span class="news-date">May 13, 2026</span>
                 </div>
                 <div class="news-title">Building a safe, effective sandbox to enable Codex on Windows</div>
                 <div class="news-description">New Windows sandbox environment for secure Codex execution.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://openai.com/index/building-codex-windows-sandbox/" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-security">Security</span>
                     <span class="news-date">May 13, 2026</span>
                 </div>
                 <div class="news-title">Our response to the TanStack npm supply chain attack</div>
                 <div class="news-description">Official response and security measures following the TanStack npm incident.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://openai.com/index/what-parameter-golf-taught-us/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-research">Research</span>
                     <span class="news-date">May 12, 2026</span>
                 </div>
                 <div class="news-title">What Parameter Golf taught us</div>
                 <div class="news-description">Research insights from the Parameter Golf project and implications for model optimization.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://openai.com/index/what-parameter-golf-taught-us/" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://openai.com/index/openai-launches-the-deployment-company/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-company">Company</span>
                     <span class="news-date">May 11, 2026</span>
                 </div>
                 <div class="news-title">OpenAI launches the OpenAI Deployment Company</div>
                 <div class="news-description">New subsidiary focused on helping enterprises deploy and integrate AI solutions.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://openai.com/index/openai-launches-the-deployment-company/" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://openai.com/index/openai-campus-network-student-club-interest-form/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-company">Company</span>
                     <span class="news-date">May 11, 2026</span>
                 </div>
                 <div class="news-title">OpenAI Campus Network: Student club interest form</div>
                 <div class="news-description">Launching a global network of student clubs for AI enthusiasts and researchers.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://openai.com/index/openai-campus-network-student-club-interest-form/" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://openai.com/index/running-codex-safely/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-security">Security</span>
                     <span class="news-date">May 8, 2026</span>
                 </div>
                 <div class="news-title">Running Codex safely at OpenAI</div>
                 <div class="news-description">Security protocols and best practices for safe Codex deployment.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://openai.com/index/running-codex-safely/" target="_blank" class="news-link">Read Article</a>
+            </div>
         </div>
 
         <!-- Anthropic Section -->
         <div class="section-header">
-            <div class="section-icon anthropic">🧠</div>
+            <div class="section-icon">🧠</div>
             <h2 class="section-title">Anthropic</h2>
             <span class="section-count">4 updates</span>
         </div>
 
         <div class="news-grid">
-            <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-product">Product</span>
                     <span class="news-date">Apr 17, 2026</span>
                 </div>
                 <div class="news-title">Claude Design by Anthropic Labs</div>
                 <div class="news-description">New visual collaboration tool for creating designs, prototypes, and slides with Claude.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://www.anthropic.com/news" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-company">Company</span>
                     <span class="news-date">Apr 7, 2026</span>
                 </div>
                 <div class="news-title">Project Glasswing</div>
                 <div class="news-description">Security initiative with AWS, Apple, Google, Microsoft, NVIDIA and others to secure critical software.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://www.anthropic.com/news" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-research">Research</span>
                     <span class="news-date">Mar 18, 2026</span>
                 </div>
                 <div class="news-title">What 81,000 people want from AI</div>
                 <div class="news-description">Largest multilingual study of its kind on AI usage, dreams, and fears.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://www.anthropic.com/news" target="_blank" class="news-link">Read Article</a>
+            </div>
 
-            <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-company">Company</span>
                     <span class="news-date">Feb 4, 2026</span>
                 </div>
                 <div class="news-title">Claude is a space to think (ad-free)</div>
                 <div class="news-description">Anthropic commits to keeping Claude ad-free, prioritizing user trust over advertising revenue.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://www.anthropic.com/news" target="_blank" class="news-link">Read Article</a>
+            </div>
         </div>
 
         <!-- Google Section -->
         <div class="section-header">
-            <div class="section-icon google">🔍</div>
+            <div class="section-icon">🔍</div>
             <h2 class="section-title">Google AI</h2>
             <span class="section-count">1 update</span>
         </div>
 
         <div class="news-grid">
-            <a href="https://blog.google/innovation-and-ai/technology/ai/ai-impact-summit-2026-india/" target="_blank" class="news-card">
+            <div class="news-card">
                 <div class="news-header">
                     <span class="news-type type-company">Event</span>
                     <span class="news-date">May 2026</span>
                 </div>
                 <div class="news-title">AI Impact Summit 2026 India</div>
                 <div class="news-description">Google's AI Impact Summit showcasing AI innovations and initiatives in India.</div>
-                <div class="news-link">Read more →</div>
-            </a>
+                <a href="https://blog.google/innovation-and-ai/technology/ai/ai-impact-summit-2026-india/" target="_blank" class="news-link">Read Article</a>
+            </div>
         </div>
 
         <footer>
