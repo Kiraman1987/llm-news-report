@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Top AI Repos Report</title>
+    <title>LLM News Report - May 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,6 +18,9 @@
             --text-muted: #52525B;
             --accent-cyan: #00D4FF;
             --accent-violet: #A855F7;
+            --accent-orange: #F97316;
+            --accent-green: #22C55E;
+            --accent-blue: #3B82F6;
             --accent-gradient: linear-gradient(135deg, #00D4FF, #A855F7);
             --border-color: #27272A;
             --success: #22C55E;
@@ -105,44 +108,220 @@
             font-size: 1.125rem;
             color: var(--text-secondary);
             max-width: 600px;
-            margin: 0 auto 24px;
+            margin: 0 auto;
         }
 
-        .meta-info {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            flex-wrap: wrap;
+        .last-updated {
+            margin-top: 16px;
             font-size: 0.875rem;
             color: var(--text-muted);
         }
 
-        .meta-info span {
+        /* Section Headers */
+        .section-header {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 12px;
+            margin: 48px 0 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        /* Stats Section */
-        .stats-grid {
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .section-icon.openai {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .section-icon.anthropic {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .section-icon.google {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .section-count {
+            margin-left: auto;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        /* News Cards */
+        .news-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .news-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .news-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .news-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .news-type {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .type-product {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent-cyan);
+        }
+
+        .type-safety {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--accent-green);
+        }
+
+        .type-engineering {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--accent-orange);
+        }
+
+        .type-company {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--accent-violet);
+        }
+
+        .type-research {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+        }
+
+        .type-security {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        .news-date {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .news-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .news-description {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .news-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: 0.875rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .news-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Highlights Section */
+        .highlights-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(168, 85, 247, 0.05));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+        }
+
+        .highlights-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight-list {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+        }
+
+        .highlight-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+
+        .highlight-list li::before {
+            content: "→";
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
-            margin-bottom: 48px;
+            margin: 40px 0;
         }
 
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 24px;
+            padding: 20px;
             text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            transform: translateY(-2px);
         }
 
         .stat-value {
@@ -152,344 +331,39 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 4px;
         }
 
         .stat-label {
             font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        /* Table Section */
-        .section {
-            margin-bottom: 48px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        h2 .icon {
-            width: 32px;
-            height: 32px;
-            background: var(--accent-gradient);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-
-        /* Table */
-        .table-container {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9375rem;
-        }
-
-        thead {
-            background: var(--bg-secondary);
-        }
-
-        th {
-            padding: 16px 20px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        td {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        tbody tr {
-            transition: background 0.2s ease;
-        }
-
-        tbody tr:hover {
-            background: var(--bg-card-hover);
-        }
-
-        .repo-name {
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .repo-name a {
-            color: var(--accent-cyan);
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-
-        .repo-name a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
-
-        .stars {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--star-color);
-            font-weight: 600;
-        }
-
-        .stars svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .description {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            max-width: 400px;
-        }
-
-        .verdict {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .verdict.useful {
-            background: rgba(34, 197, 94, 0.1);
-            color: var(--success);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-
-        .verdict.not-relevant {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
-        }
-
-        .repo-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .repo-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--accent-gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .repo-card:hover {
-            border-color: rgba(168, 85, 247, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .repo-card:hover::before {
-            opacity: 1;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .card-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-        }
-
-        .card-title a {
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .card-title a:hover {
-            color: var(--accent-cyan);
-        }
-
-        .card-stars {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            color: var(--star-color);
-            font-weight: 600;
-            font-size: 0.875rem;
-            white-space: nowrap;
-        }
-
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            line-height: 1.6;
-            margin-bottom: 16px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .card-link {
-            color: var(--accent-cyan);
-            font-size: 0.875rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: opacity 0.2s;
-        }
-
-        .card-link:hover {
-            opacity: 0.8;
-        }
-
-        /* Category Labels */
-        .category-tag {
-            display: inline-block;
-            padding: 4px 10px;
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            border-radius: 6px;
-            font-size: 0.75rem;
-            color: var(--accent-violet);
-            font-weight: 500;
-        }
-
-        /* Trending Section */
-        .trending-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .trending-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px 20px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            transition: all 0.2s ease;
-        }
-
-        .trending-item:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            transform: translateX(4px);
-        }
-
-        .trending-rank {
-            font-size: 1.5rem;
-            font-weight: 700;
             color: var(--text-muted);
-            min-width: 36px;
-        }
-
-        .trending-info {
-            flex: 1;
-        }
-
-        .trending-name {
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .trending-name a {
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .trending-name a:hover {
-            color: var(--accent-cyan);
-        }
-
-        .trending-desc {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .trending-stars {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            color: var(--star-color);
-            font-weight: 600;
-            font-size: 0.875rem;
+            margin-top: 4px;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 40px 0;
-            border-top: 1px solid var(--border-color);
             margin-top: 60px;
+            border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.875rem;
         }
 
-        .footer-accent {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 600;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
         }
 
         /* Responsive */
@@ -498,527 +372,238 @@
                 font-size: 2rem;
             }
 
-            .cards-grid {
-                grid-template-columns: 1fr;
+            .section-header {
+                flex-wrap: wrap;
             }
 
-            .stats-grid {
+            .stats-bar {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            th, td {
-                padding: 12px 16px;
-            }
-
-            .table-container {
-                font-size: 0.875rem;
-            }
         }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-muted);
-        }
-
-        /* Loading animation for elements */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .repo-card {
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        .repo-card:nth-child(1) { animation-delay: 0.05s; }
-        .repo-card:nth-child(2) { animation-delay: 0.1s; }
-        .repo-card:nth-child(3) { animation-delay: 0.15s; }
-        .repo-card:nth-child(4) { animation-delay: 0.2s; }
-        .repo-card:nth-child(5) { animation-delay: 0.25s; }
-        .repo-card:nth-child(6) { animation-delay: 0.3s; }
-        .repo-card:nth-child(7) { animation-delay: 0.35s; }
-        .repo-card:nth-child(8) { animation-delay: 0.4s; }
-        .repo-card:nth-child(9) { animation-delay: 0.45s; }
-        .repo-card:nth-child(10) { animation-delay: 0.5s; }
-        .repo-card:nth-child(11) { animation-delay: 0.55s; }
-        .repo-card:nth-child(12) { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
-
+    
     <div class="container">
         <header>
             <div class="badge">Live Report</div>
-            <h1>GitHub Top AI Repos</h1>
-            <p class="subtitle">Curated collection of the most impactful AI and LLM repositories on GitHub, ranked by stars and community engagement.</p>
-            <div class="meta-info">
-                <span>📅 May 17, 2026</span>
-                <span>🕐 09:04 UTC</span>
-                <span>📊 20 Repositories</span>
-                <span>🔍 Auto-generated</span>
-            </div>
+            <h1>LLM News Report</h1>
+            <p class="subtitle">Latest updates from OpenAI, Anthropic, and Google AI</p>
+            <p class="last-updated">Last updated: May 17, 2026 at 21:53 UTC</p>
         </header>
 
-        <!-- Stats Overview -->
-        <div class="stats-grid">
+        <!-- Stats -->
+        <div class="stats-bar">
             <div class="stat-card">
-                <div class="stat-value">1.3M+</div>
-                <div class="stat-label">Total Stars</div>
+                <div class="stat-value">9</div>
+                <div class="stat-label">OpenAI Updates</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">20</div>
-                <div class="stat-label">Repositories</div>
+                <div class="stat-value">4</div>
+                <div class="stat-label">Anthropic Updates</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">1</div>
+                <div class="stat-label">Google AI Updates</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">14</div>
-                <div class="stat-label">Useful for Us</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value">6</div>
-                <div class="stat-label">Categories</div>
+                <div class="stat-label">Total Items</div>
             </div>
         </div>
 
-        <!-- Summary Table -->
-        <section class="section">
-            <div class="section-header">
-                <h2>
-                    <div class="icon">📋</div>
-                    Summary Table
-                </h2>
+        <!-- Highlights -->
+        <div class="highlights-section">
+            <div class="highlights-title">
+                <span>⚡</span>
+                Key Highlights (Last 6 Hours)
             </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Repository</th>
-                            <th>Stars</th>
-                            <th>Category</th>
-                            <th>Description</th>
-                            <th>Verdict</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/open-webui/open-webui" target="_blank">open-webui/open-webui</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                131K
-                            </td>
-                            <td><span class="category-tag">Interface</span></td>
-                            <td class="description">User-friendly AI Interface supporting Ollama and OpenAI API</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/huggingface/transformers" target="_blank">huggingface/transformers</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                159K
-                            </td>
-                            <td><span class="category-tag">Framework</span></td>
-                            <td class="description">State-of-the-art ML for text, vision, audio, and multimodal</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/langchain-ai/langchain" target="_blank">langchain-ai/langchain</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                136K
-                            </td>
-                            <td><span class="category-tag">Framework</span></td>
-                            <td class="description">The agent engineering platform for building LLM applications</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/ollama/ollama" target="_blank">ollama/ollama</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                167K
-                            </td>
-                            <td><span class="category-tag">Inference</span></td>
-                            <td class="description">Get up and running with Llama 3.3, DeepSeek, and other models</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/ggml-org/llama.cpp" target="_blank">ggml-org/llama.cpp</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                110K
-                            </td>
-                            <td><span class="category-tag">Inference</span></td>
-                            <td class="description">LLM inference in C/C++ with wide hardware support</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/nomic-ai/gpt4all" target="_blank">nomic-ai/gpt4all</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                77K
-                            </td>
-                            <td><span class="category-tag">Application</span></td>
-                            <td class="description">Run Local LLMs on Any Device, open-source and commercial use</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/oobabooga/text-generation-webui" target="_blank">oobabooga/textgen</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                47K
-                            </td>
-                            <td><span class="category-tag">Interface</span></td>
-                            <td class="description">Open-source desktop app for local LLMs with UI and API</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/mudler/LocalAI" target="_blank">mudler/LocalAI</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                46K
-                            </td>
-                            <td><span class="category-tag">API Gateway</span></td>
-                            <td class="description">Open-source AI engine running any model on any hardware</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/BerriAI/litellm" target="_blank">BerriAI/litellm</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                45K
-                            </td>
-                            <td><span class="category-tag">API Gateway</span></td>
-                            <td class="description">Python SDK & Proxy Server for 100+ LLM APIs in OpenAI format</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/meta-llama/llama" target="_blank">meta-llama/llama</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                59K
-                            </td>
-                            <td><span class="category-tag">Model</span></td>
-                            <td class="description">Meta's LLaMA model inference code and weights</td>
-                            <td><span class="verdict not-relevant">❌ Not Relevant</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/openai/gpt-oss" target="_blank">openai/gpt-oss</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                20K
-                            </td>
-                            <td><span class="category-tag">Model</span></td>
-                            <td class="description">OpenAI's open-source GPT models and research</td>
-                            <td><span class="verdict not-relevant">❌ Not Relevant</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/haotian-liu/LLaVA" target="_blank">haotian-liu/LLaVA</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                25K
-                            </td>
-                            <td><span class="category-tag">Vision</span></td>
-                            <td class="description">Visual Instruction Tuning towards GPT-4V capabilities</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/karpathy/llm.c" target="_blank">karpathy/llm.c</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                29K
-                            </td>
-                            <td><span class="category-tag">Education</span></td>
-                            <td class="description">LLM training in simple, pure C/CUDA for educational purposes</td>
-                            <td><span class="verdict not-relevant">❌ Not Relevant</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/Stability-AI/StableLM" target="_blank">Stability-AI/StableLM</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                16K
-                            </td>
-                            <td><span class="category-tag">Model</span></td>
-                            <td class="description">Stability AI's open-source language models</td>
-                            <td><span class="verdict not-relevant">❌ Not Relevant</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/NVIDIA/Megatron-LM" target="_blank">NVIDIA/Megatron-LM</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                16K
-                            </td>
-                            <td><span class="category-tag">Training</span></td>
-                            <td class="description">NVIDIA's large transformer models training framework</td>
-                            <td><span class="verdict not-relevant">❌ Not Relevant</span></td>
-                        </tr>
-                        <tr>
-                            <td class="repo-name">
-                                <a href="https://github.com/ictnlp/LLaMA-Omni" target="_blank">ictnlp/LLaMA-Omni</a>
-                            </td>
-                            <td class="stars">
-                                <svg fill="currentColor" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-                                3K
-                            </td>
-                            <td><span class="category-tag">Voice</span></td>
-                            <td class="description">Low-latency speech interaction model based on Llama-3.1</td>
-                            <td><span class="verdict useful">✅ Useful</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+            <ul class="highlight-list">
+                <li>OpenAI launches Personal Finance feature in ChatGPT</li>
+                <li>Codex now available "from anywhere" for remote coding</li>
+                <li>ChatGPT improves context recognition in sensitive conversations</li>
+                <li>Windows sandbox for Codex released</li>
+                <li>OpenAI responds to TanStack npm supply chain attack</li>
+                <li>New "Parameter Golf" research published</li>
+                <li>OpenAI Deployment Company officially launched</li>
+            </ul>
+        </div>
 
-        <!-- Detailed Cards -->
-        <section class="section">
-            <div class="section-header">
-                <h2>
-                    <div class="icon">⭐</div>
-                    Top Picks
-                </h2>
-            </div>
-            <div class="cards-grid">
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/ollama/ollama" target="_blank">ollama/ollama</a></div>
-                        <div class="card-stars">⭐ 167K</div>
-                    </div>
-                    <div class="card-description">Get up and running with Llama 3.3, DeepSeek, Mistral, Gemma 2, and other large language models. The easiest way to run LLMs locally with a simple CLI.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/ollama/ollama" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
-                </div>
+        <!-- OpenAI Section -->
+        <div class="section-header">
+            <div class="section-icon openai">🤖</div>
+            <h2 class="section-title">OpenAI</h2>
+            <span class="section-count">9 updates</span>
+        </div>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/huggingface/transformers" target="_blank">huggingface/transformers</a></div>
-                        <div class="card-stars">⭐ 159K</div>
-                    </div>
-                    <div class="card-description">🤗 Transformers: State-of-the-art machine learning for text, vision, audio, and multimodal models. The go-to library for working with pre-trained models.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/huggingface/transformers" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
+        <div class="news-grid">
+            <a href="https://openai.com/index/personal-finance-chatgpt/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-product">Product</span>
+                    <span class="news-date">May 15, 2026</span>
                 </div>
+                <div class="news-title">A new personal finance experience in ChatGPT</div>
+                <div class="news-description">ChatGPT now helps users manage personal finances with AI-powered insights and recommendations.</div>
+                <div class="news-link">Read more →</div>
+            </a>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/langchain-ai/langchain" target="_blank">langchain-ai/langchain</a></div>
-                        <div class="card-stars">⭐ 136K</div>
-                    </div>
-                    <div class="card-description">The agent engineering platform. Build context-aware reasoning applications with composable components and integrations for LLMs.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/langchain-ai/langchain" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
+            <a href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-product">Product</span>
+                    <span class="news-date">May 14, 2026</span>
                 </div>
+                <div class="news-title">Work with Codex from anywhere</div>
+                <div class="news-description">Codex is now accessible remotely, enabling developers to code from any device and location.</div>
+                <div class="news-link">Read more →</div>
+            </a>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/open-webui/open-webui" target="_blank">open-webui/open-webui</a></div>
-                        <div class="card-stars">⭐ 131K</div>
-                    </div>
-                    <div class="card-description">User-friendly AI Interface supporting Ollama, OpenAI API, and more. Feature-packed, completely offline capable, with multi-model support.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/open-webui/open-webui" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
+            <a href="https://openai.com/index/chatgpt-recognize-context-in-sensitive-conversations/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-safety">Safety</span>
+                    <span class="news-date">May 14, 2026</span>
                 </div>
+                <div class="news-title">Helping ChatGPT better recognize context in sensitive conversations</div>
+                <div class="news-description">Improvements to context understanding for more nuanced and safer interactions.</div>
+                <div class="news-link">Read more →</div>
+            </a>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/ggml-org/llama.cpp" target="_blank">ggml-org/llama.cpp</a></div>
-                        <div class="card-stars">⭐ 110K</div>
-                    </div>
-                    <div class="card-description">LLM inference in C/C++. The foundation for efficient local inference with quantization, Metal, CUDA, and Vulkan support across platforms.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/ggml-org/llama.cpp" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
+            <a href="https://openai.com/index/building-codex-windows-sandbox/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-engineering">Engineering</span>
+                    <span class="news-date">May 13, 2026</span>
                 </div>
+                <div class="news-title">Building a safe, effective sandbox to enable Codex on Windows</div>
+                <div class="news-description">New Windows sandbox environment for secure Codex execution.</div>
+                <div class="news-link">Read more →</div>
+            </a>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/nomic-ai/gpt4all" target="_blank">nomic-ai/gpt4all</a></div>
-                        <div class="card-stars">⭐ 77K</div>
-                    </div>
-                    <div class="card-description">GPT4All: Run Local LLMs on Any Device. Open-source and available for commercial use. Cross-platform desktop application with easy model management.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/nomic-ai/gpt4all" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
+            <a href="https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-security">Security</span>
+                    <span class="news-date">May 13, 2026</span>
                 </div>
+                <div class="news-title">Our response to the TanStack npm supply chain attack</div>
+                <div class="news-description">Official response and security measures following the TanStack npm incident.</div>
+                <div class="news-link">Read more →</div>
+            </a>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/meta-llama/llama" target="_blank">meta-llama/llama</a></div>
-                        <div class="card-stars">⭐ 59K</div>
-                    </div>
-                    <div class="card-description">Meta's LLaMA model inference code and weights. The original open foundation model that sparked the local LLM revolution.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/meta-llama/llama" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict not-relevant">❌ Not Relevant</span>
-                    </div>
+            <a href="https://openai.com/index/what-parameter-golf-taught-us/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-research">Research</span>
+                    <span class="news-date">May 12, 2026</span>
                 </div>
+                <div class="news-title">What Parameter Golf taught us</div>
+                <div class="news-description">Research insights from the Parameter Golf project and implications for model optimization.</div>
+                <div class="news-link">Read more →</div>
+            </a>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/oobabooga/text-generation-webui" target="_blank">oobabooga/textgen</a></div>
-                        <div class="card-stars">⭐ 47K</div>
-                    </div>
-                    <div class="card-description">The original local LLM interface. Text, vision, tool-calling, training. UI + API, 100% offline and private with extensive extension ecosystem.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/oobabooga/text-generation-webui" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
+            <a href="https://openai.com/index/openai-launches-the-deployment-company/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-company">Company</span>
+                    <span class="news-date">May 11, 2026</span>
                 </div>
+                <div class="news-title">OpenAI launches the OpenAI Deployment Company</div>
+                <div class="news-description">New subsidiary focused on helping enterprises deploy and integrate AI solutions.</div>
+                <div class="news-link">Read more →</div>
+            </a>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/mudler/LocalAI" target="_blank">mudler/LocalAI</a></div>
-                        <div class="card-stars">⭐ 46K</div>
-                    </div>
-                    <div class="card-description">The free, Open Source alternative to OpenAI, Claude and others. Self-hosted and local-first with drop-in API compatibility. No GPU required.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/mudler/LocalAI" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
+            <a href="https://openai.com/index/openai-campus-network-student-club-interest-form/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-company">Company</span>
+                    <span class="news-date">May 11, 2026</span>
                 </div>
+                <div class="news-title">OpenAI Campus Network: Student club interest form</div>
+                <div class="news-description">Launching a global network of student clubs for AI enthusiasts and researchers.</div>
+                <div class="news-link">Read more →</div>
+            </a>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/BerriAI/litellm" target="_blank">BerriAI/litellm</a></div>
-                        <div class="card-stars">⭐ 45K</div>
-                    </div>
-                    <div class="card-description">Python SDK, Proxy Server (AI Gateway) to call 100+ LLM APIs in OpenAI format, with cost tracking, guardrails, loadbalancing and logging.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/BerriAI/litellm" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
+            <a href="https://openai.com/index/running-codex-safely/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-security">Security</span>
+                    <span class="news-date">May 8, 2026</span>
                 </div>
+                <div class="news-title">Running Codex safely at OpenAI</div>
+                <div class="news-description">Security protocols and best practices for safe Codex deployment.</div>
+                <div class="news-link">Read more →</div>
+            </a>
+        </div>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/haotian-liu/LLaVA" target="_blank">haotian-liu/LLaVA</a></div>
-                        <div class="card-stars">⭐ 25K</div>
-                    </div>
-                    <div class="card-description">[NeurIPS'23 Oral] Visual Instruction Tuning (LLaVA) built towards GPT-4V level capabilities and beyond. Multimodal understanding.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/haotian-liu/LLaVA" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict useful">✅ Useful</span>
-                    </div>
-                </div>
+        <!-- Anthropic Section -->
+        <div class="section-header">
+            <div class="section-icon anthropic">🧠</div>
+            <h2 class="section-title">Anthropic</h2>
+            <span class="section-count">4 updates</span>
+        </div>
 
-                <div class="repo-card">
-                    <div class="card-header">
-                        <div class="card-title"><a href="https://github.com/karpathy/llm.c" target="_blank">karpathy/llm.c</a></div>
-                        <div class="card-stars">⭐ 29K</div>
-                    </div>
-                    <div class="card-description">LLM training in simple, pure C/CUDA. Educational implementation of a large language model for learning purposes. Andrej Karpathy's project.</div>
-                    <div class="card-footer">
-                        <a href="https://github.com/karpathy/llm.c" class="card-link" target="_blank">View on GitHub →</a>
-                        <span class="verdict not-relevant">❌ Not Relevant</span>
-                    </div>
+        <div class="news-grid">
+            <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-product">Product</span>
+                    <span class="news-date">Apr 17, 2026</span>
                 </div>
-            </div>
-        </section>
+                <div class="news-title">Claude Design by Anthropic Labs</div>
+                <div class="news-description">New visual collaboration tool for creating designs, prototypes, and slides with Claude.</div>
+                <div class="news-link">Read more →</div>
+            </a>
 
-        <!-- Trending Section -->
-        <section class="section">
-            <div class="section-header">
-                <h2>
-                    <div class="icon">🔥</div>
-                    Trending This Week
-                </h2>
-            </div>
-            <div class="trending-list">
-                <div class="trending-item">
-                    <div class="trending-rank">1</div>
-                    <div class="trending-info">
-                        <div class="trending-name"><a href="https://github.com/tinyhumansai/openhuman" target="_blank">tinyhumansai/openhuman</a></div>
-                        <div class="trending-desc">Your Personal AI super intelligence. Private, Simple and extremely powerful.</div>
-                    </div>
-                    <div class="trending-stars">⭐ 11.3K (+1.5K today)</div>
+            <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-company">Company</span>
+                    <span class="news-date">Apr 7, 2026</span>
                 </div>
-                <div class="trending-item">
-                    <div class="trending-rank">2</div>
-                    <div class="trending-info">
-                        <div class="trending-name"><a href="https://github.com/Anil-matcha/Open-Generative-AI" target="_blank">Anil-matcha/Open-Generative-AI</a></div>
-                        <div class="trending-desc">Open-source alternative to AI video platforms with 200+ models. No content filters.</div>
-                    </div>
-                    <div class="trending-stars">⭐ 14.7K (+317 today)</div>
+                <div class="news-title">Project Glasswing</div>
+                <div class="news-description">Security initiative with AWS, Apple, Google, Microsoft, NVIDIA and others to secure critical software.</div>
+                <div class="news-link">Read more →</div>
+            </a>
+
+            <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-research">Research</span>
+                    <span class="news-date">Mar 18, 2026</span>
                 </div>
-                <div class="trending-item">
-                    <div class="trending-rank">3</div>
-                    <div class="trending-info">
-                        <div class="trending-name"><a href="https://github.com/supertone-inc/supertonic" target="_blank">supertone-inc/supertonic</a></div>
-                        <div class="trending-desc">Lightning-Fast, On-Device, Multilingual TTS running natively via ONNX.</div>
-                    </div>
-                    <div class="trending-stars">⭐ 7.1K (+749 today)</div>
+                <div class="news-title">What 81,000 people want from AI</div>
+                <div class="news-description">Largest multilingual study of its kind on AI usage, dreams, and fears.</div>
+                <div class="news-link">Read more →</div>
+            </a>
+
+            <a href="https://www.anthropic.com/news" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-company">Company</span>
+                    <span class="news-date">Feb 4, 2026</span>
                 </div>
-                <div class="trending-item">
-                    <div class="trending-rank">4</div>
-                    <div class="trending-info">
-                        <div class="trending-name"><a href="https://github.com/colbymchenry/codegraph" target="_blank">colbymchenry/codegraph</a></div>
-                        <div class="trending-desc">Pre-indexed code knowledge graph for Claude Code — fewer tokens, fewer tool calls.</div>
-                    </div>
-                    <div class="trending-stars">⭐ 2.8K (+416 today)</div>
+                <div class="news-title">Claude is a space to think (ad-free)</div>
+                <div class="news-description">Anthropic commits to keeping Claude ad-free, prioritizing user trust over advertising revenue.</div>
+                <div class="news-link">Read more →</div>
+            </a>
+        </div>
+
+        <!-- Google Section -->
+        <div class="section-header">
+            <div class="section-icon google">🔍</div>
+            <h2 class="section-title">Google AI</h2>
+            <span class="section-count">1 update</span>
+        </div>
+
+        <div class="news-grid">
+            <a href="https://blog.google/innovation-and-ai/technology/ai/ai-impact-summit-2026-india/" target="_blank" class="news-card">
+                <div class="news-header">
+                    <span class="news-type type-company">Event</span>
+                    <span class="news-date">May 2026</span>
                 </div>
-            </div>
-        </section>
+                <div class="news-title">AI Impact Summit 2026 India</div>
+                <div class="news-description">Google's AI Impact Summit showcasing AI innovations and initiatives in India.</div>
+                <div class="news-link">Read more →</div>
+            </a>
+        </div>
 
         <footer>
-            <p>Generated with <span class="footer-accent">OpenClaw</span> on May 17, 2026 at 09:04 UTC</p>
-            <p style="margin-top: 8px; font-size: 0.75rem;">Data sourced from GitHub API and web search. Star counts are approximate.</p>
+            <p>Generated by Kira AI Assistant</p>
+            <div class="footer-links">
+                <a href="https://openai.com/news">OpenAI News</a>
+                <a href="https://anthropic.com/news">Anthropic News</a>
+                <a href="https://blog.google/technology/ai/">Google AI Blog</a>
+            </div>
         </footer>
     </div>
 </body>
